@@ -13,19 +13,19 @@ const routes = [
   },
   {
     path: '/home',
-    component: () => import('../views/home/home')
+    component: () => import('../views/home/Home')
   },
   {
     path: '/category',
-    component: () => import('../views/category/category')
+    component: () => import('../views/category/Category')
   },
   {
     path: '/cart',
-    component: () => import('../views/cart/cart')
+    component: () => import('../views/cart/Cart')
   },
   {
     path: 'profile',
-    component: () => import('../views/profile/profile')
+    component: () => import('../views/profile/Profile')
   }
 ]
 // 3.创建一个router实例
