@@ -6,18 +6,22 @@
     </nav-bar>
     <!-- 轮播图 -->
     <home-swiper :bannerList="banners" v-if="banners"></home-swiper>
+    <!-- 推荐 -->
+    <home-recommend :recommendList="recommends"></home-recommend>
   </div>
 </template>
 
 <script>
 import NavBar from 'components/common/navbar/NavBar'
 import HomeSwiper from './components/HomeSwiper'
+import HomeRecommend from './components/HomeRecommend'
 import { getHomeMultiData } from 'service/home'
 export default {
   name: 'Home',
   components: {
     NavBar,
-    HomeSwiper
+    HomeSwiper,
+    HomeRecommend
   },
   data () {
     return {
