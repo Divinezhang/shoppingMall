@@ -11,7 +11,7 @@
     <!-- 本周流行 -->
     <home-feature></home-feature>
     <!-- 商品类别 -->
-    <tab-switch :tabList="[' 流行','新款','精选']"></tab-switch>
+    <tab-switch class="tab-switch" :tabList="[' 流行','新款','精选']"></tab-switch>
     <ul>
       <li>*1</li>
       <li>*1</li>
@@ -119,5 +119,10 @@ export default {
   bottom: 0;
   right: 0;
   z-index: 9;
+}
+.tab-switch {
+  /* 该属性可以实现简单的吸顶效果 */
+  position: sticky;
+  top: 44px;
 }
 </style>

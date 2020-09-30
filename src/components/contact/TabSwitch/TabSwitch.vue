@@ -37,6 +37,7 @@ export default {
   height: 40px;
   line-height: 40px;
   font-size: 15px;
+  background: #fff;
 }
 .tab-switch-item {
   flex: 1;
