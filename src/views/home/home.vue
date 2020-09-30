@@ -10,19 +10,78 @@
     <home-recommend :recommendList="recommends"></home-recommend>
     <!-- 本周流行 -->
     <home-feature></home-feature>
+    <!-- 商品类别 -->
+    <tab-switch :tabList="[' 流行','新款','精选']"></tab-switch>
+    <ul>
+      <li>*1</li>
+      <li>*1</li>
+      <li>*1</li>
+      <li>*1</li>
+      <li>*1</li>
+      <li>*1</li>
+      <li>*1</li>
+      <li>*1</li>
+      <li>*1</li>
+      <li>*1</li>
+      <li>*1</li>
+      <li>*1</li>
+      <li>*1</li>
+      <li>*1</li>
+      <li>*1</li>
+      <li>*1</li>
+      <li>*1</li>
+      <li>*1</li>
+      <li>*1</li>
+      <li>*1</li>
+      <li>*1</li>
+      <li>*1</li>
+      <li>*1</li>
+      <li>*1</li>
+      <li>*1</li>
+      <li>*1</li>
+      <li>*1</li>
+      <li>*1</li>
+      <li>*1</li>
+      <li>*1</li>
+      <li>*1</li>
+      <li>*1</li>
+      <li>*1</li>
+      <li>*1</li>
+      <li>*1</li>
+      <li>*1</li>
+      <li>*1</li>
+      <li>*1</li>
+      <li>*1</li>
+      <li>*1</li>
+      <li>*1</li>
+      <li>*1</li>
+      <li>*1</li>
+      <li>*1</li>
+      <li>*1</li>
+      <li>*1</li>
+      <li>*1</li>
+      <li>*1</li>
+      <li>*1</li>
+      <li>*1</li>
+    </ul>
   </div>
 </template>
 
 <script>
+// 全局组件
 import NavBar from 'components/common/navbar/NavBar'
+import TabSwitch from 'components/contact/TabSwitch/TabSwitch'
+// 首页组件
 import HomeSwiper from './components/HomeSwiper'
 import HomeRecommend from './components/HomeRecommend'
 import HomeFeature from './components/HomeFeature'
+
 import { getHomeMultiData } from 'service/home'
 export default {
   name: 'Home',
   components: {
     NavBar,
+    TabSwitch,
     HomeSwiper,
     HomeRecommend,
     HomeFeature

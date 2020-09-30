@@ -30,7 +30,7 @@ import TabBar from 'components/common/TabBar'
 import TabBarItem from 'components/common/TabBar-item' */
 import { TabBar, TabBarItem } from 'components/common/tabbar/index'
 export default {
-  name: 'AppTab',
+  name: 'AppTabBar',
   components: {
     TabBar,
     TabBarItem

@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import AppTabBar from 'components/contact/AppTabBar'
+import AppTabBar from 'components/contact/AppTabBar/AppTabBar'
 export default {
   name: 'App',
   components: {

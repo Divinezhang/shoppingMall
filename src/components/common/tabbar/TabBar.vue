@@ -23,7 +23,7 @@ export default {
   display: flex;
   background: #f6f6f6;
   position: fixed;
-  bottom: 5px;
+  bottom: 0;
   left: 0;
   right: 0;
 }
