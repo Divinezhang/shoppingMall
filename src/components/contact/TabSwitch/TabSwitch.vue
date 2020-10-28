@@ -1,34 +1,40 @@
 <template>
   <div class="tab-switch">
-    <div class="tab-switch-item" v-for="(item,i) in tabList" :key="i" :class="{active:currentIndex == i}" @click="itemClick(i)">
-      <span>{{item}}</span>
+    <div
+      class="tab-switch-item"
+      v-for="(item, i) in tabList"
+      :key="i"
+      :class="{ active: currentIndex == i }"
+      @click="itemClick(i)"
+    >
+      <span>{{ item }}</span>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'TabSwitch',
+  name: "TabSwitch",
   props: {
     tabList: {
       type: Array,
-      default () {
-        return []
+      default() {
+        return [];
       }
     }
   },
-  data () {
+  data() {
     return {
       currentIndex: 0
-    }
+    };
   },
   methods: {
-    itemClick (i) {
-      this.currentIndex = i
+    itemClick(i) {
+      this.currentIndex = i;
+      this.$emit("tabClick", i);
     }
-  },
-}
-
+  }
+};
 </script>
 <style>
 .tab-switch {
@@ -38,6 +44,7 @@ export default {
   line-height: 40px;
   font-size: 15px;
   background: #fff;
+  z-index: 9;
 }
 .tab-switch-item {
   flex: 1;

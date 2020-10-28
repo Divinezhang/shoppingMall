@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import { Swiper, SwiperItem } from "components/common/swiper/index";
+import { Swiper, SwiperItem } from "components/common/Swiper/index";
 export default {
   name: "HomeSwiper",
   components: {
