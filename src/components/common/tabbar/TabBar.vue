@@ -1,4 +1,3 @@
-
 <template>
   <div class="tab-bar">
     <!-- <tab-bar-item></tab-bar-item>
@@ -12,11 +11,11 @@
 <script>
 // import TabBarItem from './TabBar-item'
 export default {
-  name: 'TabBar',
+  name: "TabBar",
   components: {
     // TabBarItem
   }
-}
+};
 </script>
 <style>
 .tab-bar {
@@ -26,5 +25,6 @@ export default {
   bottom: 0;
   left: 0;
   right: 0;
+  z-index: 999;
 }
 </style>
