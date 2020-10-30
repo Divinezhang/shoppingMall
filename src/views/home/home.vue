@@ -4,20 +4,25 @@
     <nav-bar class="nav-bar">
       <div slot="center">购物街</div>
     </nav-bar>
-    <!-- 轮播图 -->
-    <home-swiper :bannerList="banners" v-if="banners"></home-swiper>
-    <!-- 推荐 -->
-    <home-recommend :recommendList="recommends"></home-recommend>
-    <!-- 本周流行 -->
-    <home-feature></home-feature>
-    <!-- 商品类别 -->
-    <tab-switch
-      class="tab-switch"
-      :tabList="[' 流行', '新款', '精选']"
-      @tabClick="tabClick"
-    ></tab-switch>
-    <!-- 商品列表 -->
-    <goods-list :goodsList="showGoodsList"></goods-list>
+    <scroll class="content" ref="scroll">
+      <!-- 轮播图 -->
+      <home-swiper :bannerList="banners" v-if="banners"></home-swiper>
+      <!-- 推荐 -->
+      <home-recommend :recommendList="recommends"></home-recommend>
+      <!-- 本周流行 -->
+      <home-feature></home-feature>
+      <!-- 商品类别 -->
+      <tab-switch
+        class="tab-switch"
+        :tabList="[' 流行', '新款', '精选']"
+        @tabClick="tabClick"
+      ></tab-switch>
+      <!-- 商品列表 -->
+      <goods-list :goodsList="showGoodsList"></goods-list>
+    </scroll>
+    <!-- 回到顶部 -->
+    <!-- 监听原生组件的点击事件，可以使用.native -->
+    <back-top @click.native="clickToTop"></back-top>
   </div>
 </template>
 
@@ -26,6 +31,8 @@
 import NavBar from "components/common/NavBar/NavBar";
 import TabSwitch from "components/contact/TabSwitch/TabSwitch";
 import GoodsList from "components/contact/GoodsList/GoodsList";
+import Scroll from "components/common/Scroll/Scroll";
+import BackTop from "components/contact/BackTop/BackTop";
 // 首页组件
 import HomeSwiper from "./components/HomeSwiper";
 import HomeRecommend from "./components/HomeRecommend";
@@ -38,6 +45,8 @@ export default {
     NavBar,
     TabSwitch,
     GoodsList,
+    Scroll,
+    BackTop,
     HomeSwiper,
     HomeRecommend,
     HomeFeature
@@ -117,6 +126,11 @@ export default {
           this.currentType = "sell";
           break;
       }
+    },
+    // 点击按钮返回顶部
+    clickToTop() {
+      // 不传第三个参数，则是方法scrollTop默认的第三个参数
+      this.$refs["scroll"].scrollTop(0, 0, 1000);
     }
   }
 };
@@ -124,7 +138,10 @@ export default {
 
 <style scoped>
 .home {
-  padding-top: 44px;
+  height: 100vh; /*vh代表的是视口viewportheight高度*/
+  /* padding-top: 44px; */
+  /* margin-top: 44px; */
+  position: relative;
 }
 
 .nav-bar {
@@ -145,5 +162,16 @@ export default {
 它的行为就像 position:relative; 而当页面滚动超出目标区域时，它的表现就像 position:fixed;，它会固定在目标位置。 */
   position: sticky;
   top: 44px;
+}
+.content {
+  /* height: calc(100% - 93px);
+  overflow: hidden; */
+  /*  */
+  overflow: hidden;
+  position: absolute;
+  top: 44px;
+  bottom: 49px;
+  left: 0;
+  right: 0;
 }
 </style>

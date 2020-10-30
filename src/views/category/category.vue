@@ -1,5 +1,5 @@
 <template>
-  <div class="category">
+  <div class="category" ref="category">
     <ul class="content">
       <li>分类列表1</li>
       <li>分类列表2</li>
@@ -119,7 +119,21 @@ export default {
   mounted() {
     console.log(document.querySelector(".category"));
     // console.log(this.$refs["category"]);
-    this.scroll = new BScroll(document.querySelector(".category"), {});
+    this.scroll = new BScroll(".category", {
+      probeType: 3,
+      pullUpLoad: true
+    });
+
+    // 1.监听组件滚动的位置
+    this.scroll.on("scroll", position => {
+      console.log("当前的位置是", position);
+    });
+
+    // 2.执行上拉加载
+    this.scroll.on("pullingUp", () => {
+      console.log("执行了上拉加载");
+      // finishPullUp();
+    });
   }
 };
 </script>
