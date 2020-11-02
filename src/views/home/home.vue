@@ -4,7 +4,14 @@
     <nav-bar class="nav-bar">
       <div slot="center">购物街</div>
     </nav-bar>
-    <scroll class="content" ref="scroll">
+    <scroll
+      class="content"
+      ref="scroll"
+      :probe-type="3"
+      @scrollPosition="currentPosition"
+      :pullUpLoad="true"
+      @pullingUp="loadMore"
+    >
       <!-- 轮播图 -->
       <home-swiper :bannerList="banners" v-if="banners"></home-swiper>
       <!-- 推荐 -->
@@ -14,7 +21,7 @@
       <!-- 商品类别 -->
       <tab-switch
         class="tab-switch"
-        :tabList="[' 流行', '新款', '精选']"
+        :tabList="['流行', '新款', '精选']"
         @tabClick="tabClick"
       ></tab-switch>
       <!-- 商品列表 -->
@@ -22,7 +29,7 @@
     </scroll>
     <!-- 回到顶部 -->
     <!-- 监听原生组件的点击事件，可以使用.native -->
-    <back-top @click.native="clickToTop"></back-top>
+    <back-top @click.native="clickToTop" v-if="isShowBackTop"></back-top>
   </div>
 </template>
 
@@ -60,7 +67,8 @@ export default {
         new: { page: 0, list: [] },
         sell: { page: 0, list: [] }
       },
-      currentType: "pop"
+      currentType: "pop",
+      isShowBackTop: false
     };
   },
   computed: {
@@ -131,6 +139,15 @@ export default {
     clickToTop() {
       // 不传第三个参数，则是方法scrollTop默认的第三个参数
       this.$refs["scroll"].scrollTop(0, 0, 1000);
+    },
+    // 监听滚动的实时位置
+    currentPosition(position) {
+      this.isShowBackTop = -position.y > 1000;
+    },
+    // 上拉加载更多
+    loadMore() {
+      console.log("当前的类型是", this.currentType);
+      this.getHomeCategory(this.currentType);
     }
   }
 };
