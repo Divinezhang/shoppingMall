@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-10-29 15:08:50
- * @LastEditTime: 2020-11-02 10:33:58
+ * @LastEditTime: 2020-11-05 14:23:25
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \shoppingmall\src\components\common\Scroll\Scroll.vue
@@ -44,24 +44,33 @@ export default {
       pullUpLoad: true */
     });
     // 2.实时监听scroll的位置
-    this.scroll.on("scroll", position => {
-      this.$emit("scrollPosition", position);
-    });
+    if (this.probeType === 2 || this.probeType === 3) {
+      this.scroll.on("scroll", position => {
+        this.$emit("scrollPosition", position);
+      });
+    }
     // 3.上拉加载更多
-    this.scroll.on("pullingUp", () => {
-      console.log("上拉加载更多");
-      this.$emit("pullingUp");
-      // 上拉加载完成以后，调用finishPullUp继续执行上拉加载
-      this.scroll.finishPullUp();
-    });
+    if (this.pullUpLoad) {
+      this.scroll.on("pullingUp", () => {
+        console.log("上拉加载更多");
+        // 默认的只是执行一次上拉加载
+        this.$emit("pullingUp");
+        // 上拉加载完成以后，调用finishPullUp继续执行上拉加载
+        this.scroll.finishPullUp();
+      });
+    }
   },
   methods: {
     scrollTop(x, y, time = 500) {
-      this.scroll.scrollTo(x, y, time);
+      this.scroll && this.scroll.scrollTo(x, y, time);
     } /* ,
     finishUpLoad() {
       this.scroll.finishPullUp();
-    } */
+    } */,
+    refresh() {
+      console.log("+++++++++++");
+      this.scroll && this.scroll.refresh();
+    }
   }
 };
 </script>

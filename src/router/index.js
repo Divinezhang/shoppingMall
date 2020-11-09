@@ -21,7 +21,24 @@ const routes = [
   },
   {
     path: '/cart',
-    component: () => import('../views/cart/Cart')
+    component: () => import('../views/cart/Cart'),
+    children: [
+      {
+        path: 'cartone',
+        name: 'cartone',
+        component: () => import('../views/cart/components/cartone.vue')
+      },
+      {
+        path: 'carttwo',
+        name: 'carttwo',
+        component: () => import('../views/cart/components/carttwo.vue')
+      },
+      {
+        path: 'cartthree',
+        name: 'cartthree',
+        component: () => import('../views/cart/components/cartthree.vue')
+      }
+    ]
   },
   {
     path: '/profile',

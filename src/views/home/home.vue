@@ -23,6 +23,7 @@
         class="tab-switch"
         :tabList="['流行', '新款', '精选']"
         @tabClick="tabClick"
+        ref="tabSwitch"
       ></tab-switch>
       <!-- 商品列表 -->
       <goods-list :goodsList="showGoodsList"></goods-list>
@@ -46,6 +47,8 @@ import HomeRecommend from "./components/HomeRecommend";
 import HomeFeature from "./components/HomeFeature";
 // 服务接口
 import { getHomeMultiData, getHomeGoods } from "service/home";
+// 工具类函数
+import { debounce } from "common/js/util";
 export default {
   name: "Home",
   components: {
@@ -68,7 +71,8 @@ export default {
         sell: { page: 0, list: [] }
       },
       currentType: "pop",
-      isShowBackTop: false
+      isShowBackTop: false,
+      taboffsetTop: 0 // tab栏距离父级的高度
     };
   },
   computed: {
@@ -84,6 +88,27 @@ export default {
     this.getHomeCategory("pop");
     this.getHomeCategory("new");
     this.getHomeCategory("sell");
+  },
+  mounted() {
+    /* this.$bus.$on("imageHaveLoad", () => {
+      this.$refs["scroll"].refresh();
+    }); */
+    // 这里的图片会一直刷新，就是说每加载一次图片，刷新一次操作
+    // 使用防抖函数，避免重复刷新
+    const refresh = debounce(this.$refs["scroll"].refresh, 100);
+
+    // 想要使用事件总线，必须在main.js中创建一个vue实例
+    // 然后使用on来监听事件总线发射的事件
+    this.$bus.$on("imageHaveLoad", () => {
+      console.log("图片已经全部加载完成");
+      // 当图片加载完成的时候，重新刷新页面
+      // this.$refs["scroll"].refresh();
+      refresh();
+    });
+
+    // 获取tabSwitch的高度offsetTop
+    // 每一个组件都有一个$el属性，用于获取组件中的元素
+    console.log(this.$refs["tabSwitch"].$el);
   },
   methods: {
     /**
@@ -177,8 +202,8 @@ export default {
   /* 该属性可以实现简单的吸顶效果 */
   /* 粘性定位，该定位基于用户滚动的位置。
 它的行为就像 position:relative; 而当页面滚动超出目标区域时，它的表现就像 position:fixed;，它会固定在目标位置。 */
-  position: sticky;
-  top: 44px;
+  /* position: sticky;
+  top: 44px; */
 }
 .content {
   /* height: calc(100% - 93px);

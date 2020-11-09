@@ -1,6 +1,14 @@
+<!--
+ * @Author: your name
+ * @Date: 2020-10-27 17:08:10
+ * @LastEditTime: 2020-11-05 14:42:15
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \shoppingmall\src\components\contact\GoodsList\GoodsListItem.vue
+-->
 <template>
   <div class="item">
-    <img :src="goodsItem.show.img" />
+    <img :src="goodsItem.show.img" @load="imageLaod" />
     <div class="item-info">
       <p>{{ goodsItem.title }}</p>
       <span class="price">{{ goodsItem.price }}</span>
@@ -18,6 +26,13 @@ export default {
       default() {
         return {};
       }
+    }
+  },
+  methods: {
+    imageLaod() {
+      // 通过事件总线发射一个事件
+      // 当图片加载完成的时候触发改事件
+      this.$bus.$emit("imageHaveLoad");
     }
   }
 };
