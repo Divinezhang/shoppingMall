@@ -4,6 +4,14 @@
     <nav-bar class="nav-bar">
       <div slot="center">购物街</div>
     </nav-bar>
+    <!-- 可以实现简单的吸顶效果 -->
+    <tab-switch
+      :class="{ tabFixed: isFixed }"
+      :tabList="['流行', '新款', '精选']"
+      @tabClick="tabClick"
+      ref="tabSwitchFixed"
+      v-show="isFixed"
+    ></tab-switch>
     <scroll
       class="content"
       ref="scroll"
@@ -23,8 +31,8 @@
       <!-- 本周流行 -->
       <home-feature></home-feature>
       <!-- 商品类别 -->
+      <!-- class="tab-switch" -->
       <tab-switch
-        class="tab-switch"
         :tabList="['流行', '新款', '精选']"
         @tabClick="tabClick"
         ref="tabSwitch"
@@ -76,7 +84,8 @@ export default {
       },
       currentType: "pop",
       isShowBackTop: false,
-      taboffsetTop: 0 // tab栏距离父级的高度
+      taboffsetTop: 0, // tab栏距离父级的高度
+      isFixed: false
     };
   },
   computed: {
@@ -163,6 +172,9 @@ export default {
           this.currentType = "sell";
           break;
       }
+      // 注意第一个tabcontrol的显示，只能用v-show控制显示隐藏，不能使用v-if
+      this.$refs["tabSwitch"].currentIndex = index;
+      this.$refs["tabSwitchFixed"].currentIndex = index;
     },
     // 点击按钮返回顶部
     clickToTop() {
@@ -171,7 +183,10 @@ export default {
     },
     // 监听滚动的实时位置
     currentPosition(position) {
+      // 1.监听backTop的位置
       this.isShowBackTop = -position.y > 1000;
+      // 2.监听tabSwitch的位置
+      this.isFixed = -position.y > this.taboffsetTop;
     },
     // 上拉加载更多
     loadMore() {
@@ -180,7 +195,8 @@ export default {
     },
     // 监听绿农图加载完成
     swiperImageLoad() {
-      console.log(this.$refs["tabSwitch"].$el.offsetTop);
+      this.taboffsetTop = this.$refs["tabSwitch"].$el.offsetTop;
+      // console.log(this.$refs["tabSwitch"].$el.offsetTop);
     }
   }
 };
@@ -198,12 +214,13 @@ export default {
   background: var(--color-tint);
   color: #ffffff;
   font-weight: 600;
-  position: fixed;
+  /* 固定定位可以用在原生浏览器的滚动 */
+  /* position: fixed;
   top: 0;
   left: 0;
   bottom: 0;
   right: 0;
-  z-index: 9;
+  z-index: 9; */
 }
 
 .tab-switch {
@@ -212,6 +229,15 @@ export default {
 它的行为就像 position:relative; 而当页面滚动超出目标区域时，它的表现就像 position:fixed;，它会固定在目标位置。 */
   /* position: sticky;
   top: 44px; */
+  position: relative;
+  z-index: 9;
+}
+.tabFixed {
+  position: fixed;
+  z-index: 9;
+  top: 43px;
+  left: 0;
+  right: 0;
 }
 .content {
   /* height: calc(100% - 93px);
