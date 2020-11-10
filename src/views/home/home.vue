@@ -13,7 +13,11 @@
       @pullingUp="loadMore"
     >
       <!-- 轮播图 -->
-      <home-swiper :bannerList="banners" v-if="banners"></home-swiper>
+      <home-swiper
+        :bannerList="banners"
+        v-if="banners"
+        @imageLoad="swiperImageLoad"
+      ></home-swiper>
       <!-- 推荐 -->
       <home-recommend :recommendList="recommends"></home-recommend>
       <!-- 本周流行 -->
@@ -108,7 +112,7 @@ export default {
 
     // 获取tabSwitch的高度offsetTop
     // 每一个组件都有一个$el属性，用于获取组件中的元素
-    console.log(this.$refs["tabSwitch"].$el);
+    // console.log(this.$refs["tabSwitch"].$el);
   },
   methods: {
     /**
@@ -173,6 +177,10 @@ export default {
     loadMore() {
       console.log("当前的类型是", this.currentType);
       this.getHomeCategory(this.currentType);
+    },
+    // 监听绿农图加载完成
+    swiperImageLoad() {
+      console.log(this.$refs["tabSwitch"].$el.offsetTop);
     }
   }
 };
