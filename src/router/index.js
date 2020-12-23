@@ -16,6 +16,10 @@ const routes = [
     component: () => import('../views/home/Home')
   },
   {
+    path: '/home/goods-detail/:id',
+    component: () => import('../views/home/pages/goodsDetail/GoodsDetail')
+  },
+  {
     path: '/category',
     component: () => import('../views/category/Category')
   },

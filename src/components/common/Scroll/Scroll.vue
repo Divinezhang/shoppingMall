@@ -1,11 +1,21 @@
 <!--
  * @Author: your name
+ * @Date: 2020-12-17 12:52:44
+ * @LastEditTime: 2020-12-18 14:26:36
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \shoppingmall\src\components\common\Scroll\Scroll.vue
+-->
+<!--
+ * @Author: your name
  * @Date: 2020-10-29 15:08:50
  * @LastEditTime: 2020-11-05 14:23:25
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \shoppingmall\src\components\common\Scroll\Scroll.vue
 -->
+
+
 <template>
   <div class="wraper" ref="wraper">
     <div class="conetnt">
@@ -61,15 +71,21 @@ export default {
     }
   },
   methods: {
+    // 回到页面顶部
     scrollTop(x, y, time = 500) {
       this.scroll && this.scroll.scrollTo(x, y, time);
     } /* ,
     finishUpLoad() {
       this.scroll.finishPullUp();
     } */,
+    // 滚动页面之后，刷新页面
     refresh() {
       console.log("+++++++++++");
       this.scroll && this.scroll.refresh();
+    },
+    // 记住页面的滚动位置
+    getScrollY() {
+      return this.scroll ? this.scroll.y : 0;
     }
   }
 };

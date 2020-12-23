@@ -1,3 +1,11 @@
+<!--
+ * @Author: your name
+ * @Date: 2020-12-17 12:52:44
+ * @LastEditTime: 2020-12-23 16:47:10
+ * @LastEditors: your name
+ * @Description: In User Settings Edit
+ * @FilePath: \shoppingmall\src\components\common\NavBar\NavBar.vue
+-->
 <template>
   <div class="nav-bar">
     <div class="left">
@@ -14,11 +22,10 @@
 
 <script>
 export default {
-  name: 'NavBar'
-}
-
+  name: "NavBar"
+};
 </script>
-<style>
+<style scoped>
 .nav-bar {
   display: flex;
   height: 44px;

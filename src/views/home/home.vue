@@ -85,7 +85,8 @@ export default {
       currentType: "pop",
       isShowBackTop: false,
       taboffsetTop: 0, // tab栏距离父级的高度
-      isFixed: false
+      isFixed: false,
+      saveY: 0 // 页面实时滚动的位置
     };
   },
   computed: {
@@ -122,6 +123,20 @@ export default {
     // 获取tabSwitch的高度offsetTop
     // 每一个组件都有一个$el属性，用于获取组件中的元素
     // console.log(this.$refs["tabSwitch"].$el);
+  },
+  // 在当前页面
+  activated() {
+    // console.log("actived");
+    // 下次进入页面之后，显示到上次离开页面的的位置
+    this.$refs["scroll"].scrollTop(0, this.saveY, 0);
+    this.$refs["scroll"].refresh();
+  },
+  // 离开当前页面
+  deactivated() {
+    // console.log("deactived");
+    // 记录离开页面的时候实时滚动的位置
+    this.saveY = this.$refs["scroll"].getScrollY();
+    console.log(this.saveY);
   },
   methods: {
     /**

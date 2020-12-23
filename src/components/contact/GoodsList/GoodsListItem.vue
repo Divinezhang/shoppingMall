@@ -7,7 +7,7 @@
  * @FilePath: \shoppingmall\src\components\contact\GoodsList\GoodsListItem.vue
 -->
 <template>
-  <div class="item">
+  <div class="item" @click="toGoodsDetail()">
     <img :src="goodsItem.show.img" @load="imageLaod" />
     <div class="item-info">
       <p>{{ goodsItem.title }}</p>
@@ -33,6 +33,10 @@ export default {
       // 通过事件总线发射一个事件
       // 当图片加载完成的时候触发改事件
       this.$bus.$emit("imageHaveLoad");
+    },
+    // 跳转商品详情
+    toGoodsDetail() {
+      this.$router.push("/home/goods-detail/" + this.goodsItem.iid);
     }
   }
 };
