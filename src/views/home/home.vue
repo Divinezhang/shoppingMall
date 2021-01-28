@@ -222,7 +222,7 @@ export default {
   height: 100vh; /*vh代表的是视口viewportheight高度*/
   /* padding-top: 44px; */
   /* margin-top: 44px; */
-  position: relative;
+  /* position: relative; */
 }
 
 .nav-bar {
@@ -255,14 +255,14 @@ export default {
   right: 0;
 }
 .content {
-  /* height: calc(100% - 93px);
-  overflow: hidden; */
-  /*  */
+  height: calc(100% - 93px);
   overflow: hidden;
+  /*  */
+  /* overflow: hidden;
   position: absolute;
   top: 44px;
   bottom: 49px;
   left: 0;
-  right: 0;
+  right: 0; */
 }
 </style>

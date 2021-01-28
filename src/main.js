@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-12-17 12:52:44
- * @LastEditTime: 2020-12-21 16:33:49
+ * @LastEditTime: 2021-01-20 15:37:33
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \shoppingmall\src\main.js
@@ -18,7 +18,7 @@ Vue.use(AMap)
 // 初始化高德地图
 AMap.initAMapApiLoader({
   key:'9b6c2270906415f5836d5e9d80a78950',
-  plugin:['Autocomplete','PlaceSearch','Geocoder'],
+  plugin:['Autocomplete','PlaceSearch','Geocoder','AMap.ToolBar','AMap.Scale'],
   v:'1.4.0'
 })
 
